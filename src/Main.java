@@ -28,20 +28,27 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String[] bigramR = new String[nobR];
-        all_bigram(bigramR);
 
 
-        StringBuffer text = read("res/war_and_peace.txt"); //Считывание файла
+        StringBuffer text = Read_File.read("res/war_and_peace.txt"); //Считывание файла
+        StringBuffer textHead = Read_File.read("res/glava.txt"); //Считываение файла
+
+
+
+        //StringBuffer text = read("res/war_and_peace.txt"); //Считывание файла
         float[] analysisText = count(text.toString()); //Анализ текста
         int[] sortText = sort(analysisText); //Сортировка по номеру
 
-        StringBuffer textHead = read("res/glava.txt"); //Считываение файла
+        //StringBuffer textHead = read("res/glava.txt"); //Считываение файла
         String textCesar = cesar(textHead.toString()); //Прогон в шифр Цезаря
         float[] analysisTextCesar = count(textCesar); //Анализ текста
         int[] sortTextCesar = sort(analysisTextCesar); //Сортировка по номеру
 
         String textNoCesar = NO_cesar(textCesar, sortText, sortTextCesar);
+
+        String[] bigramR = new String[nobR];
+        all_bigram(bigramR);
+
 
         float[] analysisTextBigram = count_bigram(text.toString(), bigramR);
         float[] analysisTextCesarBigram = count_bigram(textNoCesar, bigramR);
@@ -63,6 +70,8 @@ public class Main {
         System.out.println("\n" + "Текст главы: " + textHead);
         System.out.println("Шифр главы: " + textCesar);
         System.out.println("Дешифр главы : " + textNoCesar);
+
+
         System.out.println();
         System.out.println("Биграмы в исходном тексте: ");
         for (int i = 0; i < numbers; i++)
